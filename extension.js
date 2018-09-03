@@ -18,12 +18,15 @@ const Main = imports.ui.main;
 let button;
 let extension_icon;
 let color_effect;
+let fx_ndx;
 
 function _toggleEffect() {
-    if ( Main.uiGroup.has_effects( color_effect ) ) {
-        Main.uiGroup.remove_effect( color_effect );
-    } else {
-        Main.uiGroup.add_effect( color_effect );
+    if (fx_ndx) {
+        Main.uiGroup.remove_effect( color_effect[fx_ndx-1]);
+    }
+    fx_ndx = (fx_ndx + 1) % (color_effect.length+1);
+    if (fx_ndx){	
+        Main.uiGroup.add_effect( color_effect[fx_ndx-1]);
     }
 }
 
@@ -41,8 +44,13 @@ function init() {
     button.set_child(extension_icon);
 
     //Creation of effect
-    color_effect = new Clutter.DesaturateEffect();
-    
+    color_effect = [	new Clutter.DesaturateEffect(), 
+			new Clutter.ColorizeEffect(new Clutter.Color( {red:255, green:192, blue: 0, alpha:255} )),
+			new Clutter.ColorizeEffect(new Clutter.Color( {red:255, green:128, blue: 0, alpha:255} )),
+			new Clutter.ColorizeEffect(new Clutter.Color( {red:64, green:255, blue: 0, alpha:255} )),
+			new Clutter.ColorizeEffect(new Clutter.Color( {red:0, green:192, blue: 255, alpha:255} ))
+		]
+    fx_ndx = 0
     //Signal connection
     button.connect('button-press-event', _toggleEffect);
 }

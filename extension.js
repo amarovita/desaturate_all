@@ -55,7 +55,7 @@ function init() {
 			_tint( {red:255, green:224, blue: 0, alpha:255} ),
 			_tint( {red:128, green:255, blue: 0, alpha:255} ),
 			_tint( {red:0, green:224, blue: 255, alpha:255} ),
-			_tint( {red:255, green:248, blue: 240, alpha:255} ),
+			_tint( {red:255, green:240, blue: 192, alpha:255} ),
 			new Clutter.DesaturateEffect()
 		]
     fx_ndx = 0;

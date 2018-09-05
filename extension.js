@@ -31,6 +31,13 @@ function _toggleEffect() {
 }
 
 
+function _tint(color) {
+    fx = new Clutter.ColorizeEffect();
+    cl = new Clutter.Color(color);
+    fx.tint = cl;
+    return fx;
+}
+
 function init() {
     //Creation of button
     button = new St.Bin({ style_class: 'panel-button',
@@ -44,14 +51,14 @@ function init() {
     button.set_child(extension_icon);
 
     //Creation of effect
-    color_effect = [	
-			new Clutter.ColorizeEffect(new Clutter.Color( {red:255, green:128, blue: 0, alpha:255} )),
-			new Clutter.ColorizeEffect(new Clutter.Color( {red:255, green:192, blue: 0, alpha:255} )),
-			new Clutter.ColorizeEffect(new Clutter.Color( {red:64, green:255, blue: 0, alpha:255} )),
-			new Clutter.ColorizeEffect(new Clutter.Color( {red:0, green:192, blue: 255, alpha:255} ))
-			new Clutter.DesaturateEffect(), 
+    color_effect = [
+			_tint( {red:255, green:224, blue: 0, alpha:255} ),
+			_tint( {red:128, green:255, blue: 0, alpha:255} ),
+			_tint( {red:0, green:224, blue: 255, alpha:255} ),
+			_tint( {red:255, green:248, blue: 240, alpha:255} ),
+			new Clutter.DesaturateEffect()
 		]
-    fx_ndx = 0
+    fx_ndx = 0;
     //Signal connection
     button.connect('button-press-event', _toggleEffect);
 }
